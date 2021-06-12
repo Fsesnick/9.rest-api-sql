@@ -3,64 +3,34 @@
 // load modules
 const express = require('express');
 const morgan = require('morgan');
-const { Sequelize } = require('sequelize');
+const routes = require('./routes/users');
 // variable to enable global error logging
+/**
+ * const users = require('./routes/users');
+const courses = require('./routes/courses');
+ */
 const enableGlobalErrorLogging = process.env.ENABLE_GLOBAL_ERROR_LOGGING === 'true';
 
 // create the Express app
 const app = express();
 
+// Setup request body JSON parsing.
+app.use(express.json());
+
 // setup morgan which gives us http request logging
 app.use(morgan('dev'));
+var sequelize = require('./models').sequelize;
 
-var { sequelize, models }  = require('./models').sequelize;
-//const { sequelize, models } = require('./db');
-const { User, Course } = models;
-
-let FernandaSesnick;
-let JavaScript;
-
+//test database connection
 (async () => {
- await sequelize.sync();
+  await sequelize.sync();
   try {
     await sequelize.authenticate();
     console.log('Connection to databse established.');
-   
-   const userInstances = await promiseFinally.all([ User.create({
-      firstName:'Fernanda',
-      lastName: 'Sesnick',
-      emailAddress:'fernanda@gmail.com',
-      password: 'fernandinha123',
-    }),
-
-   ]);
-   console.log(JSON.stringify(userInstances, null, 2));
-   FernandaSesnick = userInstances ;
-
-   console.log('Adding course to the database...');
-   const courseInstances = await Promise.all([ 
-     Course.create({
-       title: 'Java Script',
-       description: 'Full Stack course',
-       materialsNeeded: 'Laptop',
-       userId: FernandaSesnick.id,
-     })
-   ]);
-   console.log(JSON.stringify(courseInstances, null, 2));
-   JavaScript = courseInstances;
-   process.exit();
-
   } catch (error) {
-    if (error.name === 'SequelizeValidationError') {
-      const errors = error.errors.map(err => err.message);
-      console.error('Validation errors: ', errors);
-    } else {
-      throw error;
-    }
+    console.error('Connection to database failed: ', error);
   }
 })();
-
-
 
 // setup a friendly greeting for the root route
 app.get('/', (req, res) => {
@@ -68,6 +38,14 @@ app.get('/', (req, res) => {
     message: 'Welcome to the REST API project!',
   });
 });
+
+//Add routes
+app.use('/api', routes);
+
+/**
+ * const users = require('./routes/users');
+const courses = require('./routes/courses');
+ */
 
 // send 404 if no other route matched
 app.use((req, res) => {
