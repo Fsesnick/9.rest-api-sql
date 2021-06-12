@@ -37,7 +37,12 @@ module.exports = (sequelize) => {
    * This allows code within the associate() method 
    * to access any of the available models. */
   User.associate = (models) => {
-    User.hasMany(models.Course);
+    User.hasMany(models.Course,  {
+       foreignKey:{ 
+         fildName:'userId', 
+         allowNull: false,
+        },
+      });
   };
 
   return User;
