@@ -14,6 +14,7 @@ const app = express();
 app.use(morgan('dev'));
 
 var sequelize = require('./models').sequelize;
+//const { sequelize, models } = require('./db');
 
 (async () => {
  await sequelize.sync();
