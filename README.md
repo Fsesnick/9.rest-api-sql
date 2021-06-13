@@ -8,7 +8,13 @@ npx sequelize model:create --name User --attributes firstName:string,lastName:st
 ```bash
 npx sequelize model:create --name Course --attributes title:string,description:text,estimatedTime:string,materialsNeeded:string,userId:integer
 ```
+RUN: <br/>
 
-Initialize the project using the npx sequelize init<br/>
+```bash
+npm install and npm start
+```
+
+tests.http has the routes <br/>
+Initialized the project using the npx sequelize init<br/>
 
 npm install basic-auth <br/>
