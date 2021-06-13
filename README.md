@@ -8,3 +8,5 @@ npx sequelize model:create --name User --attributes firstName:string,lastName:st
 ```bash
 npx sequelize model:create --name Course --attributes title:string,description:text,estimatedTime:string,materialsNeeded:string,userId:integer
 ```
+
+Initialize the project using the npx sequelize init<br/>
