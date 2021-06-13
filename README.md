@@ -10,3 +10,5 @@ npx sequelize model:create --name Course --attributes title:string,description:t
 ```
 
 Initialize the project using the npx sequelize init<br/>
+
+npm install basic-auth <br/>
