@@ -32,17 +32,17 @@ module.exports = (sequelize) => {
       type: Sequelize.STRING,
       allowNull: false,
       validate: {
-        notNull: {
-          msg: "A course description is required",
-        },
-        notEmpty: {
+         notEmpty: {
           msg: "Please enter a course description",
         },
       },
+    },    
+    estimatedTime: {
+      type: Sequelize.STRING,
     },
     materialsNeeded:{
       type: Sequelize.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     id:{
       type: Sequelize.INTEGER,

@@ -3,11 +3,8 @@
 const express = require('express');
 const morgan = require('morgan');
 const routesUser = require('./routes/users');
-// variable to enable global error logging
-/**
- * const users = require('./routes/users');
-const courses = require('./routes/courses');
- */
+const routesCourses = require('./routes/courses');
+
 const enableGlobalErrorLogging = process.env.ENABLE_GLOBAL_ERROR_LOGGING === 'true';
 
 // create the Express app
@@ -41,6 +38,7 @@ app.get('/', (req, res) => {
 
 //Add routes
 app.use('/api', routesUser);
+app.use('/api', routesCourses);
 
 // send 404 if no other route matched
 app.use((req, res) => {
