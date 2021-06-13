@@ -27,7 +27,7 @@ router.get('/users',authenticateUser,asyncHandler(async (req, res) => {
 // Route that creates a new user.
 router.post('/users',   asyncHandler(async (req, res) => {
   try {
-    await Users.create(req.body);
+    await User.create(req.body);
     res.location("/");
     res.status(201).json({ message: "Account successfully created!" });
     res.end();
