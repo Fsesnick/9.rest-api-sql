@@ -13,28 +13,50 @@ module.exports = (sequelize) => {
       // define association here
     }
   };
-  Course.init({
-    title:{
+  Course.init(
+    {
+    title: {
       type: Sequelize.STRING,
       allowNull: false,
+      validate: {
+        notNull: {
+          msg: "A course title is required",
+        },
+        notEmpty: {
+          msg: "Please enter a course title",
+        },
+      },
     },
     description: Sequelize.TEXT,
     estimatedTime:{
       type: Sequelize.STRING,
       allowNull: false,
+      validate: {
+        notNull: {
+          msg: "A course description is required",
+        },
+        notEmpty: {
+          msg: "Please enter a course description",
+        },
+      },
     },
     materialsNeeded:{
       type: Sequelize.STRING,
       allowNull: false,
     },
-    userId: Sequelize.INTEGER
+    id:{
+      type: Sequelize.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    }
   },{sequelize});
 
   Course.associate = (models) => {
     Course.belongsTo(models.User,  {
+      as:"User",
       foreignKey:{ 
         fildName:'userId', 
-        allowNull: false,
+        //allowNull: false,
        },
      });
   };
