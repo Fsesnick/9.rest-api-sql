@@ -27,8 +27,7 @@ module.exports = (sequelize) => {
         },
       },
     },
-    description: Sequelize.TEXT,
-    estimatedTime:{
+    description:{
       type: Sequelize.STRING,
       allowNull: false,
       validate: {
@@ -39,6 +38,12 @@ module.exports = (sequelize) => {
     },    
     estimatedTime: {
       type: Sequelize.STRING,
+      allowNull: false,
+      validate: {
+         notEmpty: {
+          msg: "Please enter a course description",
+        },
+      },
     },
     materialsNeeded:{
       type: Sequelize.STRING,
